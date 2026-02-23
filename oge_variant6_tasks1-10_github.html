@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ОГЭ Информатика — Вариант 6 — задания 1–10</title>
+<meta name="color-scheme" content="light" />
+<style>
+
+    :root{
+      --bg:#f6f9ff; --card:#fff; --ink:#0d1b2a; --muted:#516173;
+      --blue:#1f6feb; --blue2:#0b5ed7; --line:rgba(31,111,235,.18);
+      --shadow:0 18px 60px rgba(13,27,42,.12); --radius:20px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:var(--sans); color:var(--ink);
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(31,111,235,.14), transparent 60%),
+        radial-gradient(1000px 700px at 80% 0%, rgba(31,111,235,.10), transparent 55%),
+        linear-gradient(180deg, #fff 0%, var(--bg) 45%, #fff 120%);
+    }
+
+    .topbar{position:sticky; top:0; z-index:20; backdrop-filter:blur(10px);
+      background:rgba(255,255,255,.78); border-bottom:1px solid var(--line);}
+    .topbar-inner{max-width:1280px; margin:0 auto; padding:14px 16px;
+      display:flex; align-items:center; gap:12px;}
+    .brand{display:flex; align-items:center; gap:10px; min-width:320px;}
+    .logo{width:36px;height:36px;border-radius:12px;
+      background:linear-gradient(135deg, rgba(31,111,235,.95), rgba(31,111,235,.55));
+      box-shadow:0 10px 26px rgba(31,111,235,.28); position:relative;}
+    .logo:after{content:""; position:absolute; inset:8px; border-radius:9px;
+      border:2px solid rgba(255,255,255,.85);}
+    .brand h1{font-size:14px;margin:0;letter-spacing:.2px;line-height:1.15}
+    .brand .sub{display:block;font-size:12px;color:var(--muted);font-weight:600;margin-top:2px}
+
+    .nav{margin-left:auto; display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+    .nav button{
+      width:40px;height:40px;border-radius:14px;border:1px solid var(--line);
+      background:rgba(255,255,255,.92); color:var(--ink); font-weight:900; cursor:pointer;
+      transition:transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
+      box-shadow:0 10px 26px rgba(13,27,42,.06);
+    }
+    .nav button:hover{transform:translateY(-1px)}
+    .nav button.active{
+      background:linear-gradient(135deg,var(--blue),var(--blue2));
+      color:#fff;border-color:rgba(31,111,235,.55);
+      box-shadow:0 14px 36px rgba(31,111,235,.22);
+    }
+
+    .wrap{max-width:1180px;margin:0 auto;padding:22px 16px 70px}
+
+    .page{display:none; opacity:0; transform:translateY(10px);
+      transition:opacity .28s ease, transform .28s ease; min-height:calc(100vh - 90px); padding-top:14px;}
+    .page.active{display:block}
+    .page.active.show{opacity:1; transform:translateY(0)}
+
+    .card{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+      border:1px solid var(--line); overflow:hidden;}
+    .card-head{padding:30px 30px 22px; border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(31,111,235,.10), rgba(255,255,255,0));}
+    .kicker{display:flex;align-items:center;gap:10px;color:var(--muted);
+      font-weight:900;letter-spacing:.2px;text-transform:uppercase;font-size:12px;}
+    .pill{padding:7px 11px;border-radius:999px;background:rgba(31,111,235,.12);
+      color:rgba(31,111,235,.98);border:1px solid rgba(31,111,235,.18);font-weight:900;}
+    .title{margin:12px 0 6px;font-size:28px;letter-spacing:.2px;line-height:1.15}
+    .desc{margin:0;color:var(--muted);line-height:1.55;max-width:92ch;font-size:14px}
+    .card-body{padding:24px 30px 30px}
+
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px; align-items:start}
+    @media (max-width: 980px){.brand{min-width:unset}.grid{grid-template-columns:1fr}}
+
+    .panel{border:1px solid var(--line);border-radius:18px;padding:16px 16px 14px;background:rgba(246,249,255,.55)}
+    .panel h3{margin:0 0 12px;font-size:15px;letter-spacing:.2px}
+
+    .block{
+  position:relative;
+  border:1px solid rgba(13,27,42,.10);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.92), rgba(246,249,255,.72));
+  border-radius:18px;
+  padding:16px 16px 14px 18px;
+  margin-top:12px;
+  box-shadow:0 10px 24px rgba(13,27,42,.06);
+  overflow:hidden;
+}
+.block:before{
+  content:"";
+  position:absolute;
+  left:0; top:0; bottom:0;
+  width:6px;
+  background:linear-gradient(180deg, rgba(31,111,235,.85), rgba(31,111,235,.25));
+}
+.block:after{
+  content:"";
+  position:absolute;
+  right:-120px; top:-120px;
+  width:260px; height:260px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(31,111,235,.16), transparent 60%);
+  pointer-events:none;
+}
+.blockTitle{
+  display:flex; align-items:center; gap:10px;
+  font-weight:1000; color:rgba(31,111,235,.98);
+  letter-spacing:.25px; text-transform:uppercase; font-size:12px;
+  margin-bottom:10px;
+}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 11px;
+  border-radius:999px;
+  background:rgba(31,111,235,.10);
+  border:1px solid rgba(31,111,235,.18);
+  color:rgba(31,111,235,.98);
+  font-weight:1000;
+}
+    .text{white-space:pre-wrap; line-height:1.72; font-size:16px; color:var(--ink)}
+    .mini{font-size:12px;color:var(--muted);line-height:1.45;margin-top:8px}
+    .mini code, .text code{font-family:var(--mono)}
+    ul.clean{margin:10px 0 0; padding-left:18px; line-height:1.6}
+    ul.clean li{margin:6px 0}
+
+    .trainer{display:flex;flex-direction:column;gap:10px}
+    .trainer label{font-size:13px;color:var(--muted);font-weight:900}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    input[type="text"],input[type="password"]{
+      width:100%;padding:12px 12px;border-radius:14px;border:1px solid rgba(13,27,42,.14);
+      outline:none;font-size:15px;background:#fff;font-family:var(--sans);
+    }
+    input:focus{
+      border-color:rgba(31,111,235,.55); box-shadow:0 0 0 4px rgba(31,111,235,.12)
+    }
+    .btn{padding:12px 14px;border-radius:14px;border:1px solid rgba(31,111,235,.35);
+      background:linear-gradient(135deg, rgba(31,111,235,.10), rgba(31,111,235,.06));
+      color:var(--ink);font-weight:1000;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(31,111,235,.12);
+      background:linear-gradient(135deg, rgba(31,111,235,.16), rgba(31,111,235,.08));}
+    .btn.primary{border-color:rgba(31,111,235,.55);background:linear-gradient(135deg,var(--blue),var(--blue2));
+      color:#fff;box-shadow:0 14px 34px rgba(31,111,235,.18);}
+    .btn.danger{border-color:rgba(163,22,33,.35);
+      background:linear-gradient(135deg, rgba(163,22,33,.12), rgba(163,22,33,.06)); color:#7b0d14;}
+
+    .result{min-height:24px;font-size:15px;font-weight:1000}
+    .ok{color:#0a7a2e} .bad{color:#a31621}
+
+    .imgbox{background:#fff;border:1px solid rgba(13,27,42,.10); border-radius:16px; padding:12px; margin-top:10px}
+    .imgbox img{max-width:100%; height:auto; display:block; border-radius:12px}
+
+    details{margin-top:10px; border:1px solid var(--line); border-radius:16px; background:rgba(255,255,255,.75); padding:10px 12px}
+    details summary{cursor:pointer; font-weight:1000; color:rgba(31,111,235,.98)}
+
+
+
+.niceTable{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:14px;border:1px solid rgba(30,58,138,.18);background:#fff}
+.niceTable th,.niceTable td{padding:10px 12px;border-bottom:1px solid rgba(30,58,138,.12)}
+.niceTable thead th{background:linear-gradient(180deg, rgba(59,130,246,.12), rgba(59,130,246,.06));text-align:left;font-weight:700;color:#0f2a63}
+.niceTable tbody tr:last-child td{border-bottom:none}
+
+.niceTable.matrix td.diag, .niceTable.matrix th.diag{background:#bfe3ee !important;}
+
+.codeGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:10px}
+@media (max-width: 900px){.codeGrid{grid-template-columns:1fr}}
+.codeCard{border:1px solid rgba(37,99,235,.18);background:rgba(255,255,255,.7);border-radius:14px;padding:10px 10px 6px}
+.codeLabel{font-weight:800;font-size:12px;letter-spacing:.02em;color:#0b1f4a;margin:0 0 6px 2px;opacity:.85}
+pre.code.small{font-size:12px;line-height:1.25;padding:10px;border-radius:12px;margin:0;white-space:pre-wrap}
+</style>
+</head>
+<body>
+<div class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <h1>ОГЭ Информатика — Вариант 6 <span class="sub">интерактивные карточки 1–10 • меню сверху • проверка ответов</span></h1>
+      </div>
+    </div>
+    <nav class="nav" aria-label="Выбор задания" id="nav">
+      <button data-go="1" class="active" title="Задание 1">1</button>
+<button data-go="2" class="" title="Задание 2">2</button>
+<button data-go="3" class="" title="Задание 3">3</button>
+<button data-go="4" class="" title="Задание 4">4</button>
+<button data-go="5" class="" title="Задание 5">5</button>
+<button data-go="6" class="" title="Задание 6">6</button>
+<button data-go="7" class="" title="Задание 7">7</button>
+<button data-go="8" class="" title="Задание 8">8</button>
+<button data-go="9" class="" title="Задание 9">9</button>
+<button data-go="10" class="" title="Задание 10">10</button>
+    </nav>
+</div>
+</div>
+
+<main class="wrap" id="pages">
+
+<section class="page active show" id="p1">
+  <div class="card">
+    <div class="card-head">
+      <div class="kicker"><span class="pill">1</span> ОГЭ Информатика • Вариант 6</div>
+      <h2 class="title">Задание 1</h2>
+      <p class="desc">Слева — условие и вопрос, справа — ввод ответа и проверка. После нажатия «Проверить» приложение сравнит ответ с ключом.</p>
+    </div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="panel">
+          <h3>Текст задания</h3>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">📘 ДАНО</span> Условия</div>
+            <div class="text">В одной из кодировок Unicode каждый символ кодируется 5 битами. Вова написал текст (в нём нет лишних пробелов):<br>«PeterPiperpicked a peckofpickledpeppers.<br>A peck of pickled peppers Peter Piper picked.<br>If Peter Piper picked a peck of pickled peppers,<br>Where's the peck of pickled peppers Peter Piper picked?»<br>Ученик вычеркнул из списка одну букву во всех местах. При этом размер нового предложения в данной кодировке оказалось на 60 бит меньше, чем размер исходного предложения.</div>
+          </div>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">✅ ТРЕБУЕТСЯ</span> Вопрос</div>
+            <div class="text">Напишите в ответе вычеркнутое название буквы.</div>
+          </div>
+
+          
+
+          <details>
+            <summary>Мини-подсказка (как оформлять ответ)</summary>
+            <div class="mini">
+              Пробелы игнорируются, регистр не важен, «ё» = «е».
+              Если для задания несколько допустимых ответов, учитель может указать их через символ <b>|</b>.
+            </div>
+          </details>
+        </div>
+
+        <div class="panel trainer">
+          <h3>Проверка ответа</h3>
+          <label for="a1">Введи ответ:</label>
+          <div class="row">
+            <input id="a1" type="text" placeholder="Ответ (как в ОГЭ)" />
+            <button class="btn primary" data-check="1">Проверить</button>
+          </div>
+          <div class="result" id="r1"></div>
+          <div class="mini">Проверка идёт по встроенным ключам (после очистки данных браузера они загрузятся заново).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="page " id="p2">
+  <div class="card">
+    <div class="card-head">
+      <div class="kicker"><span class="pill">2</span> ОГЭ Информатика • Вариант 6</div>
+      <h2 class="title">Задание 2</h2>
+      <p class="desc">Слева — условие и вопрос, справа — ввод ответа и проверка. После нажатия «Проверить» приложение сравнит ответ с ключом.</p>
+    </div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="panel">
+          <h3>Текст задания</h3>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">📘 ДАНО</span> Условия</div>
+            <div class="text">От разведчика было получено сообщение:<br>0101011001101010<br><br>В этом сообщении зашифрован пароль — последовательность русских букв.<br>В пароле использовались только буквы А, Б, И, П, Р, Т; каждая буква кодировалась двоичным словом по таблице.</div>
+          </div>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">✅ ТРЕБУЕТСЯ</span> Вопрос</div>
+            <div class="text">Расшифруйте сообщение. Запишите в ответе пароль.</div>
+          </div>
+
+          
+<div class="imgbox">
+  <div class="blockTitle"><span class="badge">🧩 ТАБЛИЦА</span> Данные</div>
+  <table class='niceTable'><tbody><tr><th>Буква</th><th>А</th><th>Б</th><th>И</th><th>П</th><th>Р</th><th>Т</th></tr><tr><th>Код</th><td>10</td><td>00</td><td>011</td><td>110</td><td>010</td><td>111</td></tr></tbody></table>
+</div>
+
+
+          <details>
+            <summary>Мини-подсказка (как оформлять ответ)</summary>
+            <div class="mini">
+              Пробелы игнорируются, регистр не важен, «ё» = «е».
+              Если для задания несколько допустимых ответов, учитель может указать их через символ <b>|</b>.
+            </div>
+          </details>
+        </div>
+
+        <div class="panel trainer">
+          <h3>Проверка ответа</h3>
+          <label for="a2">Введи ответ:</label>
+          <div class="row">
+            <input id="a2" type="text" placeholder="Ответ (как в ОГЭ)" />
+            <button class="btn primary" data-check="2">Проверить</button>
+          </div>
+          <div class="result" id="r2"></div>
+          <div class="mini">Проверка идёт по встроенным ключам (после очистки данных браузера они загрузятся заново).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="page " id="p3">
+  <div class="card">
+    <div class="card-head">
+      <div class="kicker"><span class="pill">3</span> ОГЭ Информатика • Вариант 6</div>
+      <h2 class="title">Задание 3</h2>
+      <p class="desc">Слева — условие и вопрос, справа — ввод ответа и проверка. После нажатия «Проверить» приложение сравнит ответ с ключом.</p>
+    </div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="panel">
+          <h3>Текст задания</h3>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">📘 ДАНО</span> Условия</div>
+            <div class="text">Какое количество букв удовлетворяет выражению (используется только русский 33 буквенный алфавит):<br>(Алфавит &amp;буквы(ПЕНАЛ)) И НЕ (буквы(ВЕЛОСИПЕД) И буквы(ЛОГОПЕД)) ИЛИ буквы(КОТ)</div>
+          </div>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">✅ ТРЕБУЕТСЯ</span> Вопрос</div>
+            <div class="text">Запишите ответ.</div>
+          </div>
+
+          
+
+          <details>
+            <summary>Мини-подсказка (как оформлять ответ)</summary>
+            <div class="mini">
+              Пробелы игнорируются, регистр не важен, «ё» = «е».
+              Если для задания несколько допустимых ответов, учитель может указать их через символ <b>|</b>.
+            </div>
+          </details>
+        </div>
+
+        <div class="panel trainer">
+          <h3>Проверка ответа</h3>
+          <label for="a3">Введи ответ:</label>
+          <div class="row">
+            <input id="a3" type="text" placeholder="Ответ (как в ОГЭ)" />
+            <button class="btn primary" data-check="3">Проверить</button>
+          </div>
+          <div class="result" id="r3"></div>
+          <div class="mini">Проверка идёт по встроенным ключам (после очистки данных браузера они загрузятся заново).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="page " id="p4">
+  <div class="card">
+    <div class="card-head">
+      <div class="kicker"><span class="pill">4</span> ОГЭ Информатика • Вариант 6</div>
+      <h2 class="title">Задание 4</h2>
+      <p class="desc">Слева — условие и вопрос, справа — ввод ответа и проверка. После нажатия «Проверить» приложение сравнит ответ с ключом.</p>
+    </div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="panel">
+          <h3>Текст задания</h3>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">📘 ДАНО</span> Условия</div>
+            <div class="text">Между населёнными пунктами A, B, C, D, E, F, G построены дороги, протяжённость которых (в километрах) приведена в таблице.<br>Определите длину кратчайшего пути между пунктами C и Е, проходящего через пункт A. Передвигаться можно только по дорогам, протяжённость которых указана в таблице.</div>
+          </div>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">✅ ТРЕБУЕТСЯ</span> Вопрос</div>
+            <div class="text">Запишите ответ.</div>
+          </div>
+
+          
+<div class="imgbox">
+  <div class="blockTitle"><span class="badge">🧩 ТАБЛИЦА</span> Данные</div>
+  <table class='niceTable matrix'><tbody><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th></tr><tr><th>A</th><td class='diag'></td><td>8</td><td>4</td><td>5</td><td>12</td><td>16</td><td>21</td></tr><tr><th>B</th><td>8</td><td class='diag'></td><td>3</td><td>14</td><td>2</td><td>6</td><td>9</td></tr><tr><th>C</th><td>4</td><td>3</td><td class='diag'></td><td>8</td><td>4</td><td>3</td><td>5</td></tr><tr><th>D</th><td>5</td><td>14</td><td>8</td><td class='diag'></td><td>6</td><td>11</td><td>13</td></tr><tr><th>E</th><td>12</td><td>2</td><td>4</td><td>6</td><td class='diag'></td><td>34</td><td>2</td></tr><tr><th>F</th><td>16</td><td>6</td><td>3</td><td>11</td><td>34</td><td class='diag'></td><td>7</td></tr><tr><th>G</th><td>21</td><td>9</td><td>5</td><td>13</td><td>2</td><td>7</td><td class='diag'></td></tr></tbody></table>
+</div>
+
+
+          <details>
+            <summary>Мини-подсказка (как оформлять ответ)</summary>
+            <div class="mini">
+              Пробелы игнорируются, регистр не важен, «ё» = «е».
+              Если для задания несколько допустимых ответов, учитель может указать их через символ <b>|</b>.
+            </div>
+          </details>
+        </div>
+
+        <div class="panel trainer">
+          <h3>Проверка ответа</h3>
+          <label for="a4">Введи ответ:</label>
+          <div class="row">
+            <input id="a4" type="text" placeholder="Ответ (как в ОГЭ)" />
+            <button class="btn primary" data-check="4">Проверить</button>
+          </div>
+          <div class="result" id="r4"></div>
+          <div class="mini">Проверка идёт по встроенным ключам (после очистки данных браузера они загрузятся заново).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="page " id="p5">
+  <div class="card">
+    <div class="card-head">
+      <div class="kicker"><span class="pill">5</span> ОГЭ Информатика • Вариант 6</div>
+      <h2 class="title">Задание 5</h2>
+      <p class="desc">Слева — условие и вопрос, справа — ввод ответа и проверка. После нажатия «Проверить» приложение сравнит ответ с ключом.</p>
+    </div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="panel">
+          <h3>Текст задания</h3>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">📘 ДАНО</span> Условия</div>
+            <div class="text">У исполнителя Альфа две команды, которым присвоены номера:<br>1. прибавь b<br>2. умножь на 3<br>3. умножь на 2<br>(b – неизвестное натуральное число; b ≥ 1)<br>Программа для исполнителя Альфа – это последовательность номеров команд.  Известно, что программа 2113121 переводит число 3 в число 136.</div>
+          </div>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">✅ ТРЕБУЕТСЯ</span> Вопрос</div>
+            <div class="text">Определите значение b.</div>
+          </div>
+
+          
+
+          <details>
+            <summary>Мини-подсказка (как оформлять ответ)</summary>
+            <div class="mini">
+              Пробелы игнорируются, регистр не важен, «ё» = «е».
+              Если для задания несколько допустимых ответов, учитель может указать их через символ <b>|</b>.
+            </div>
+          </details>
+        </div>
+
+        <div class="panel trainer">
+          <h3>Проверка ответа</h3>
+          <label for="a5">Введи ответ:</label>
+          <div class="row">
+            <input id="a5" type="text" placeholder="Ответ (как в ОГЭ)" />
+            <button class="btn primary" data-check="5">Проверить</button>
+          </div>
+          <div class="result" id="r5"></div>
+          <div class="mini">Проверка идёт по встроенным ключам (после очистки данных браузера они загрузятся заново).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="page " id="p6">
+  <div class="card">
+    <div class="card-head">
+      <div class="kicker"><span class="pill">6</span> ОГЭ Информатика • Вариант 6</div>
+      <h2 class="title">Задание 6</h2>
+      <p class="desc">Слева — условие и вопрос, справа — ввод ответа и проверка. После нажатия «Проверить» приложение сравнит ответ с ключом.</p>
+    </div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="panel">
+          <h3>Текст задания</h3>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">📘 ДАНО</span> Условия</div>
+            <div class="text">Ниже приведена программа, записанная на пяти языках программирования. Программа печатает <b>YES</b>, если выполнено условие <b>s &gt; 8</b> <b>ИЛИ</b> <b>t &gt; 8</b>, иначе печатает <b>NO</b>.<br><br>Было проведено <b>9</b> запусков программы, при которых в качестве значений переменных вводились пары чисел <b>(s, t)</b>:<br>(5, 6); (9, 5); (6, 8); (10, 9); (−9, −10); (−9, 10); (−10, 9); (8, 8); (8, 6).</div>
+          </div>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">✅ ТРЕБУЕТСЯ</span> Вопрос</div>
+            <div class="text">Сколько было запусков, при которых программа напечатала «YES»?</div>
+          </div>
+
+</div>
+<div class="imgbox">
+  <div class="blockTitle"><span class="badge">🧩 КОД</span> Программа (в разных языках)</div>
+  <div class="codeGrid">
+    <div class="codeCard">
+      <div class="codeLabel">Python</div>
+      <pre class="code small">s = int(input())
+t = int(input())
+if s &gt; 8 or t &gt; 8:
+    print("YES")
+else:
+    print("NO")</pre>
+    </div>
+    <div class="codeCard">
+      <div class="codeLabel">Паскаль</div>
+      <pre class="code small"></pre>
+    </div>
+    <div class="codeCard">
+      <div class="codeLabel">Бейсик</div>
+      <pre class="code small">DIM s, t AS INTEGER
+INPUT s
+INPUT t
+IF s &gt; 8 OR t &gt; 8 THEN
+  PRINT "YES"
+ELSE
+  PRINT "NO"
+ENDIF</pre>
+    </div>
+    <div class="codeCard">
+      <div class="codeLabel">Алгоритм. язык</div>
+      <pre class="code small">алг
+нач
+цел s, t
+ввод s
+ввод t
+если s &gt; 8 или t &gt; 8
+то вывод "YES"
+иначе вывод "NO"
+все
+кон</pre>
+    </div>
+  </div>
+</div>
+
+          <details>
+            <summary>Мини-подсказка (как оформлять ответ)</summary>
+            <div class="mini">
+              Пробелы игнорируются, регистр не важен, «ё» = «е».
+              Если для задания несколько допустимых ответов, учитель может указать их через символ <b>|</b>.
+            </div>
+          </details>
+        </div>
+
+        <div class="panel trainer">
+          <h3>Проверка ответа</h3>
+          <label for="a6">Введи ответ:</label>
+          <div class="row">
+            <input id="a6" type="text" placeholder="Ответ (как в ОГЭ)" />
+            <button class="btn primary" data-check="6">Проверить</button>
+          </div>
+          <div class="result" id="r6"></div>
+          <div class="mini">Проверка идёт по встроенным ключам (после очистки данных браузера они загрузятся заново).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="page " id="p7">
+  <div class="card">
+    <div class="card-head">
+      <div class="kicker"><span class="pill">7</span> ОГЭ Информатика • Вариант 6</div>
+      <h2 class="title">Задание 7</h2>
+      <p class="desc">Слева — условие и вопрос, справа — ввод ответа и проверка. После нажатия «Проверить» приложение сравнит ответ с ключом.</p>
+    </div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="panel">
+          <h3>Текст задания</h3>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">📘 ДАНО</span> Условия</div>
+            <div class="text">Доступ к файлу htp.doc, находящемуся в папке ftp на сервере file.org, осуществляется по протоколу ftp. Фрагменты адреса файла закодированы цифрами от 1 до 7. Запишите в ответе последовательность этих цифр, кодирующую адрес указанного файла в сети Интернет.<br>1) ://<br>2) ftp<br>3) /<br>4) file.org<br>5) htp.doc</div>
+          </div>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">✅ ТРЕБУЕТСЯ</span> Вопрос</div>
+            <div class="text">Запишите ответ.</div>
+          </div>
+
+          
+
+          <details>
+            <summary>Мини-подсказка (как оформлять ответ)</summary>
+            <div class="mini">
+              Пробелы игнорируются, регистр не важен, «ё» = «е».
+              Если для задания несколько допустимых ответов, учитель может указать их через символ <b>|</b>.
+            </div>
+          </details>
+        </div>
+
+        <div class="panel trainer">
+          <h3>Проверка ответа</h3>
+          <label for="a7">Введи ответ:</label>
+          <div class="row">
+            <input id="a7" type="text" placeholder="Ответ (как в ОГЭ)" />
+            <button class="btn primary" data-check="7">Проверить</button>
+          </div>
+          <div class="result" id="r7"></div>
+          <div class="mini">Проверка идёт по встроенным ключам (после очистки данных браузера они загрузятся заново).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="page " id="p8">
+  <div class="card">
+    <div class="card-head">
+      <div class="kicker"><span class="pill">8</span> ОГЭ Информатика • Вариант 6</div>
+      <h2 class="title">Задание 8</h2>
+      <p class="desc">Слева — условие и вопрос, справа — ввод ответа и проверка. После нажатия «Проверить» приложение сравнит ответ с ключом.</p>
+    </div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="panel">
+          <h3>Текст задания</h3>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">📘 ДАНО</span> Условия</div>
+            <div class="text">В языке запросов к поисковому серверу для обозначения логической операции «ИЛИ» используется символ «|», а для обозначения логической операции «И» — символ «&amp;». В таблице приведены запросы и количество найденных по ним страниц некоторого сегмента сети Интернет.</div>
+          </div>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">✅ ТРЕБУЕТСЯ</span> Вопрос</div>
+            <div class="text">Какое количество страниц (в тысячах) будет найдено по запросу <b>Сливы</b>? Считается, что все запросы выполнялись практически одновременно, так что набор страниц, содержащих все искомые слова, не изменялся.</div>
+          </div>
+
+          
+<div class="imgbox">
+  <div class="blockTitle"><span class="badge">🧩 ТАБЛИЦА</span> Данные</div>
+  <table class='niceTable'><tbody><tr><th>Запрос</th><th>Найдено страниц (в тысячах)</th></tr><tr><th>Яблоки</th><td>73</td></tr><tr><th>Яблоки | Сливы</th><td>148</td></tr><tr><th>Яблоки &amp; Сливы</th><td>14</td></tr></tbody></table>
+</div>
+
+
+          <details>
+            <summary>Мини-подсказка (как оформлять ответ)</summary>
+            <div class="mini">
+              Пробелы игнорируются, регистр не важен, «ё» = «е».
+              Если для задания несколько допустимых ответов, учитель может указать их через символ <b>|</b>.
+            </div>
+          </details>
+        </div>
+
+        <div class="panel trainer">
+          <h3>Проверка ответа</h3>
+          <label for="a8">Введи ответ:</label>
+          <div class="row">
+            <input id="a8" type="text" placeholder="Ответ (как в ОГЭ)" />
+            <button class="btn primary" data-check="8">Проверить</button>
+          </div>
+          <div class="result" id="r8"></div>
+          <div class="mini">Проверка идёт по встроенным ключам (после очистки данных браузера они загрузятся заново).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="page " id="p9">
+  <div class="card">
+    <div class="card-head">
+      <div class="kicker"><span class="pill">9</span> ОГЭ Информатика • Вариант 6</div>
+      <h2 class="title">Задание 9</h2>
+      <p class="desc">Слева — условие и вопрос, справа — ввод ответа и проверка. После нажатия «Проверить» приложение сравнит ответ с ключом.</p>
+    </div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="panel">
+          <h3>Текст задания</h3>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">📘 ДАНО</span> Условия</div>
+            <div class="text">На рисунке — схема дорог, связывающих города А, Б, В, Г, Д, Е, Ж, З, И, К. По каждой дороге можно двигаться только в одном направлении, указанном стрелкой.</div>
+          </div>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">✅ ТРЕБУЕТСЯ</span> Вопрос</div>
+            <div class="text">Сколько существует различных путей из города А в город К, проходящих через город Д?</div>
+          </div>
+
+          
+<div class="imgbox">
+  <div class="blockTitle"><span class="badge">🧩 СХЕМА</span> Схема дорог</div>
+  <svg viewBox="0 0 900 300" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Схема дорог">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#1d4ed8"/>
+      </marker>
+      <style>
+        .e{stroke:#1d4ed8;stroke-width:3.5;fill:none;marker-end:url(#arr)}
+        .c{fill:#ffffff;stroke:#1d4ed8;stroke-width:3}
+        .t{font:700 26px system-ui,-apple-system,Segoe UI,Roboto,Arial; fill:#0b1f4a}
+      </style>
+    </defs>
+
+    <!-- positions -->
+    <!-- А(90,160) Б(220,80) В(280,160) Г(220,240) Д(420,80) Е(430,240) Ж(600,160) З(630,240) И(740,80) К(840,160) -->
+
+    <!-- edges -->
+    <path class="e" d="M90 160 L220 80" />
+    <path class="e" d="M90 160 L280 160" />
+    <path class="e" d="M90 160 L220 240" />
+
+    <path class="e" d="M220 80 L420 80" />
+    <path class="e" d="M220 80 L280 160" />
+
+    <path class="e" d="M220 240 L280 160" />
+    <path class="e" d="M220 240 L430 240" />
+
+    <path class="e" d="M280 160 L420 80" />
+    <path class="e" d="M280 160 L600 160" />
+    <path class="e" d="M280 160 L430 240" />
+    <path class="e" d="M280 160 L630 240" />
+
+    <path class="e" d="M420 80 L740 80" />
+    <path class="e" d="M420 80 L600 160" />
+
+    <path class="e" d="M430 240 L630 240" />
+
+    <path class="e" d="M600 160 L740 80" />
+    <path class="e" d="M600 160 L630 240" />
+    <path class="e" d="M600 160 L840 160" />
+
+    <path class="e" d="M630 240 L840 160" />
+    <path class="e" d="M740 80 L840 160" />
+
+    <!-- nodes -->
+    <circle class="c" cx="90" cy="160" r="16"/><text class="t" x="72" y="152">А</text>
+    <circle class="c" cx="220" cy="80" r="16"/><text class="t" x="208" y="50">Б</text>
+    <circle class="c" cx="280" cy="160" r="16"/><text class="t" x="268" y="130">В</text>
+    <circle class="c" cx="220" cy="240" r="16"/><text class="t" x="208" y="282">Г</text>
+
+    <circle class="c" cx="420" cy="80" r="16"/><text class="t" x="408" y="50">Д</text>
+    <circle class="c" cx="430" cy="240" r="16"/><text class="t" x="418" y="282">Е</text>
+
+    <circle class="c" cx="600" cy="160" r="16"/><text class="t" x="588" y="130">Ж</text>
+    <circle class="c" cx="630" cy="240" r="16"/><text class="t" x="620" y="282">З</text>
+
+    <circle class="c" cx="740" cy="80" r="16"/><text class="t" x="730" y="50">И</text>
+    <circle class="c" cx="840" cy="160" r="16"/><text class="t" x="830" y="130">К</text>
+  </svg>
+</div>
+
+
+          <details>
+            <summary>Мини-подсказка (как оформлять ответ)</summary>
+            <div class="mini">
+              Пробелы игнорируются, регистр не важен, «ё» = «е».
+              Если для задания несколько допустимых ответов, учитель может указать их через символ <b>|</b>.
+            </div>
+          </details>
+        </div>
+
+        <div class="panel trainer">
+          <h3>Проверка ответа</h3>
+          <label for="a9">Введи ответ:</label>
+          <div class="row">
+            <input id="a9" type="text" placeholder="Ответ (как в ОГЭ)" />
+            <button class="btn primary" data-check="9">Проверить</button>
+          </div>
+          <div class="result" id="r9"></div>
+          <div class="mini">Проверка идёт по встроенным ключам (после очистки данных браузера они загрузятся заново).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="page " id="p10">
+  <div class="card">
+    <div class="card-head">
+      <div class="kicker"><span class="pill">10</span> ОГЭ Информатика • Вариант 6</div>
+      <h2 class="title">Задание 10</h2>
+      <p class="desc">Слева — условие и вопрос, справа — ввод ответа и проверка. После нажатия «Проверить» приложение сравнит ответ с ключом.</p>
+    </div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="panel">
+          <h3>Текст задания</h3>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">📘 ДАНО</span> Условия</div>
+            <div class="text">Среди приведённых ниже трёх чисел, записанных в различных системах счисления, посчитайте количество встречаемых <b>нечётных цифр</b> у значений этих чисел, переведённых в <b>10-ю</b> систему счисления. В ответе запишите только число.<br><br>(Например: у числа 563243 нечётных цифр 3 — две тройки и пятёрка.)<br><br><b>Даны числа:</b> 1CB<sub>16</sub>, 145<sub>8</sub>, 100110<sub>2</sub></div>
+          </div>
+
+          <div class="block">
+            <div class="blockTitle"><span class="badge">✅ ТРЕБУЕТСЯ</span> Вопрос</div>
+            <div class="text">Запишите общее количество нечётных цифр в десятичной записи этих трёх чисел.</div>
+          </div>
+
+          
+
+          <details>
+            <summary>Мини-подсказка (как оформлять ответ)</summary>
+            <div class="mini">
+              Пробелы игнорируются, регистр не важен, «ё» = «е».
+              Если для задания несколько допустимых ответов, учитель может указать их через символ <b>|</b>.
+            </div>
+          </details>
+        </div>
+
+        <div class="panel trainer">
+          <h3>Проверка ответа</h3>
+          <label for="a10">Введи ответ:</label>
+          <div class="row">
+            <input id="a10" type="text" placeholder="Ответ (как в ОГЭ)" />
+            <button class="btn primary" data-check="10">Проверить</button>
+          </div>
+          <div class="result" id="r10"></div>
+          <div class="mini">Проверка идёт по встроенным ключам (после очистки данных браузера они загрузятся заново).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="mini" style="max-width:1180px;margin:0 auto;padding:0 16px 22px;">
+  Горячие клавиши: <span class="kbd">Alt</span> + <span class="kbd">←</span>/<span class="kbd">→</span> — листать задания.
+</div>
+
+<script>
+/* GitHub Pages edition: без режима учителя, но с автопроверкой */
+
+const KEY_ANSWERS  = "oge_answers_v6_variant6";
+const PRESET_B64 = "eyIxIjogIksiLCAiMiI6ICLQoNCQ0J/QmNCg0JAiLCAiMyI6ICI1IiwgIjQiOiAiMTIiLCAiNSI6ICI0IiwgIjYiOiAiNCIsICI3IjogIjIxNDMyMzUiLCAiOCI6ICI4OSIsICI5IjogIjE2IiwgIjEwIjogIjUifQ==";
+const PRESET = JSON.parse(decodeURIComponent(escape(atob(PRESET_B64))));
+
+function normalize(s){
+  return (s ?? "")
+    .toString()
+    .trim()
+    .replaceAll(/\s+/g,"")
+    .replaceAll("ё","е").replaceAll("Ё","Е")
+    .toUpperCase();
+}
+function loadAnswers(){
+  try{
+    const raw = localStorage.getItem(KEY_ANSWERS);
+    if(!raw) return {};
+    const obj = JSON.parse(raw);
+    return obj && typeof obj === "object" ? obj : {};
+  }catch{ return {}; }
+}
+function saveAnswers(obj){ localStorage.setItem(KEY_ANSWERS, JSON.stringify(obj)); }
+
+(function seedDefaultAnswers(){
+  const cur = loadAnswers();
+  if(!cur || Object.keys(cur).length===0) saveAnswers({...PRESET});
+})();
+
+/* navigation */
+const pages=[...document.querySelectorAll(".page")];
+const navBtns=[...document.querySelectorAll(".nav button")];
+function setActive(n){
+  navBtns.forEach(b=>b.classList.toggle("active", b.dataset.go===String(n)));
+  pages.forEach(p=>{
+    const active=p.id==="p"+n;
+    p.classList.toggle("active", active);
+    p.classList.toggle("show", active);
+  });
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+navBtns.forEach(btn=>btn.addEventListener("click", ()=>setActive(btn.dataset.go)));
+window.addEventListener("keydown",(e)=>{
+  if(!e.altKey) return;
+  const current=Number(document.querySelector(".nav button.active")?.dataset.go || "1");
+  if(e.key==="ArrowRight") setActive(Math.min(10,current+1));
+  if(e.key==="ArrowLeft")  setActive(Math.max(1,current-1));
+});
+
+/* checking */
+document.querySelectorAll("[data-check]").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    const n=Number(btn.dataset.check);
+    const input=document.getElementById("a"+n);
+    const res=document.getElementById("r"+n);
+    const got=normalize(input.value);
+
+    if(!got){
+      res.className="result bad";
+      res.textContent="Введите ответ, чтобы проверить.";
+      return;
+    }
+
+    const answers=loadAnswers();
+    const keyNorm=normalize(answers[String(n)] ?? PRESET[String(n)] ?? "");
+
+    if(!keyNorm){
+      res.className="result bad";
+      res.textContent="Ключ для этого задания не найден (возможно, очищены данные браузера). Перезагрузите страницу.";
+      return;
+    }
+
+    const variants = keyNorm.split("|").map(v=>v.trim()).filter(Boolean);
+    const ok = variants.includes(got);
+
+    res.className = "result " + (ok ? "ok" : "bad");
+    res.textContent = ok ? "✅ Верно!" : "❌ Неверно. Попробуй ещё раз.";
+  });
+});
+</script>
+</body>
+</html>
